@@ -1,0 +1,268 @@
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: var(--color-bg);
+    /* Dotted Background Pattern */
+    background-image:
+        radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        radial-gradient(circle at center, rgba(0, 0, 0, 0) 0%, rgba(5, 5, 5, 1) 90%);
+    /* Vignette */
+    background-size: 30px 30px, 100% 100%;
+}
+
+.content {
+    position: relative;
+    z-index: 50;
+    /* Ensure content is ALWAYS on top */
+    text-align: center;
+    max-width: 750px;
+    /* Reduced to prevent overlap with cards */
+    padding: 0 20px;
+    pointer-events: none;
+    /* Let clicks pass through empty spaces, but text handles pointer-events */
+}
+
+.title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.15;
+    margin-bottom: 24px;
+    color: #fff;
+    letter-spacing: -0.02em;
+    position: relative;
+    font-weight: 750;
+    /* Extra bold */
+}
+
+.textGradient {
+    background: linear-gradient(to right, #ffffff 20%, #888888 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #ccc;
+    margin-bottom: 24px;
+    backdrop-filter: blur(4px);
+}
+
+.badgeDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #22c55e;
+    /* Green active dot */
+    box-shadow: 0 0 8px #22c55e;
+}
+
+.subtitle {
+    font-size: 1.15rem;
+    max-width: 580px;
+    margin: 0 auto;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+}
+
+/* Re-enable pointer events for buttons inside content */
+.actions {
+    pointer-events: auto;
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+/* Floating Cards Layout */
+.cardContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.floatingCard {
+    position: absolute;
+    background: rgba(15, 15, 15, 0.6);
+    /* Semi-transparent dark */
+    backdrop-filter: blur(12px);
+    /* Glass effect */
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    padding: 12px;
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    /* Inner highlight */
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s ease;
+    pointer-events: auto;
+    animation: float 6s ease-in-out infinite;
+}
+
+.floatingCard:hover {
+    transform: scale(1.05) translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(20, 20, 20, 0.8);
+    z-index: 20;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Stagger animations */
+.cardInput {
+    animation-delay: 0s;
+}
+
+.cardProcess {
+    animation-delay: 2s;
+}
+
+.cardOutput {
+    animation-delay: 1s;
+}
+
+.cardVideo {
+    animation-delay: 3s;
+}
+
+/* Specific Card Positions - Pushed further out to avoid text overlap */
+.cardInput {
+    top: 15%;
+    left: 5%;
+    width: 260px;
+}
+
+.cardProcess {
+    top: 10%;
+    right: 3%;
+    width: 260px;
+}
+
+.cardOutput {
+    bottom: 12%;
+    left: 8%;
+    width: 300px;
+}
+
+.cardVideo {
+    bottom: 12%;
+    right: 3%;
+    width: 280px;
+}
+
+.cardImage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/10;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: #000;
+    margin-bottom: 12px;
+}
+
+.cardLabel {
+    font-size: 0.8rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+}
+
+.cardDesc {
+    font-size: 0.9rem;
+    color: #fff;
+    margin-top: 4px;
+    font-weight: 500;
+}
+
+/* Connector Lines (SVG) */
+.connectors {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.connectorLine {
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 1.5;
+    fill: none;
+    stroke-dasharray: 10;
+    animation: dash 30s linear infinite;
+}
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: 1000;
+    }
+}
+
+@media (max-width: 1200px) {
+    .cardInput {
+        left: 2%;
+        scale: 0.8;
+    }
+
+    .cardProcess {
+        right: 2%;
+        scale: 0.8;
+    }
+}
+
+@media (max-width: 968px) {
+
+    .cardContainer,
+    .connectors {
+        display: none;
+    }
+
+    /* Hide complex graphic on mobile */
+    .hero {
+        align-items: flex-start;
+        padding-top: 140px;
+    }
+}
