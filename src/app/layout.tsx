@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google"; // Premium modern font
 import "./globals.css";
+import Footer from "@/components/Footer";
+import LiveChat from "@/components/LiveChat";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -27,6 +29,8 @@ export default function RootLayout({
         <AuthProvider>
           <CartProvider>
             {children}
+            <Footer />
+            <LiveChat />
           </CartProvider>
         </AuthProvider>
       </body>
